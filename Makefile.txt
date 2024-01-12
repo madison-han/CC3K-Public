@@ -1,0 +1,22 @@
+CXX = g++
+CXXFLAGS = -std=c++2a -Wall -Werror=vla -MMD
+EXEC = cc3k
+OBJECTS = main.o floor.o cell.o occupant.o chamber.o \
+    gold.o potion.o character.o player.o enemy.o   \
+	shade.o goblin.o vampire.o troll.o drow.o debugMan.o\
+	 dwarf.o elf.o dragon.o merchant.o orc.o halfling.o human.o \
+ 	smallGold.o normalGold.o merchantGold.o dragonGold.o \
+ 	 wdPotion.o waPotion.o rhPotion.o phPotion.o baPotion.o bdPotion.o 
+DEPENDS = ${OBJECTS:.o=.d}
+
+${EXEC}: ${OBJECTS}
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
+ 
+-include ${DEPENDS}
+
+.PHONY: clean
+
+clean:
+	rm ${OBJECTS} ${EXEC} ${DEPENDS}
+
+
